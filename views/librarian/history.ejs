@@ -1,0 +1,67 @@
+
+  <div class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+    <div class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75">
+      <a href="/librarian/dashboard">
+                <svg class="w-8 h-8 text-indigo-600 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+			</svg>
+            </a>
+    </div>
+
+    <div class="px-10 mt-6">
+      <div class="overflow-hidden">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">#</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">User ID</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">User Name</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">Title</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">Author</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">Loan Date</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">Return Date</th>
+              <th class="px-6 py-4 text-left text-sm font-medium text-gray-900">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (loans.length > 0) { %>
+              <% loans.forEach((loan, index) => { %>
+                <tr class="<%= index % 2 === 0 ? 'bg-gray-50' : 'bg-white' %> border-b">
+                  <td class="px-6 py-4 text-gray-900"><%= index + 1 %></td>
+                  <td class="px-6 py-4 text-gray-900"><%= loan.user_id %></td>
+                  <td class="px-6 py-4 text-gray-900"><%= loan.user_name %></td>
+                  <td class="px-6 py-4 text-gray-900"><%= loan.title %></td>
+                  <td class="px-6 py-4 text-gray-900"><%= loan.author %></td>
+                  <td class="px-6 py-4 text-gray-900"><%= new Date(loan.loan_date).toLocaleDateString() %></td>
+                  <td class="px-6 py-4 text-gray-900">
+                    <%= loan.return_date ? new Date(loan.return_date).toLocaleDateString() : 'Not Returned' %>
+                  </td>
+                  <td class="px-6 py-4 text-gray-900">
+                    <% if (!loan.return_date) { %>
+                      <form action="/librarian/transactions" method="POST">
+                        <input type="text" class="hidden"name="loanId" value="<%= loan.id %>">
+                        <button type="submit" class="px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                          Return
+                        </button>
+                      </form>
+                    <% } else { %>
+                      Returned
+                    <% } %>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr>
+                <td colspan="8" class="text-center px-6 py-4 text-gray-700">
+                  No loan history available.
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+

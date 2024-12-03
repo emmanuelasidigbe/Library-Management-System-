@@ -1,0 +1,86 @@
+
+
+<body>
+	<div
+		class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+		<div class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75">
+			<a href="/user/dashboard">
+                <svg class="w-8 h-8 text-indigo-600 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+			</svg>
+            </a>
+		<!-- <form action="/librarian/search" method="post">
+				<input
+				class="flex items-center h-10 px-4 ml-10 text-sm bg-gray-200 rounded-full focus:outline-none focus:ring"
+				name="query"
+				type="search" placeholder="Search for anything…" />
+				<button type="submit" class="hidden"></button>
+		</form> -->
+			<div class="ml-10">
+				<a class="mx-2 text-sm font-semibold text-indigo-700" href="/user/history">loan history</a>
+			</div>
+			<buton class="flex items-center justify-center w-8 h-8 ml-auto overflow-hidden rounded-full cursor-pointer">
+				<img src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
+					alt="" />
+				
+			</buton>
+		</div>
+		<div class="px-10 mt-6">
+			<h1 class="text-2xl font-bold"></h1>
+					<div class="flex items-center flex-shrink-0 mt-4 h-10  w-72">
+			<span class="block text-sm font-semibold">Total</span>
+	
+		</div>
+		</div>
+  <!-- books -->
+     <div class="flex flex-col">
+  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                #
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Title
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Author
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Loan date
+              </th>
+            </tr>
+          </thead>
+                 <tbody>
+          <% if (loans.length > 0) { %>
+            <% loans.forEach((loan, index) => { %>
+              <tr class="<%= index % 2 === 0 ? 'bg-gray-50' : 'bg-white' %> border-b">
+                <td class="px-6 py-4 text-gray-900"><%= index + 1 %></td>
+                <td class="px-6 py-4 text-gray-900"><%= loan.title %></td>
+                <td class="px-6 py-4 text-gray-900"><%= loan.author %></td>
+                <td class="px-6 py-4 text-gray-900"><%= new Date(loan.loan_date).toLocaleDateString() %></td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr>
+              <td colspan="4" class="text-center px-6 py-4 text-gray-700">
+                No loan history available.
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+		
+	</div>
+	<!-- Component End -->
+
+	

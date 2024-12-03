@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ], // Ensure this includes your types folder
+    "types": [
+      "node",
+      "express-session"
+    ] // Include express-session types
+  },
+  "include": [
+    "./**/*",
+    "./types/**/*"
+  ], // Ensure your types directory is included
+  "exclude": [
+    "node_modules"
+  ]
+}
