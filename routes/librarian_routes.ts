@@ -17,11 +17,12 @@ router.get("/dashboard", async (req: Request, res: Response) => {
 router.get("/add-book", (req: Request, res: Response) => {
   res.render("librarian/add");
 });
-
+router.get("/edit-bbok",LibrarianController.getEditBook)
 router.get("/transactions", LibrarianController.getAllTransactions);
 router.post("/transactions",LibrarianController.returnBook);
 
 router.post("/add-book", addBookValidator, LibrarianController.addBook);
+
 
 router.post("/delete-book", LibrarianController.deleteBook);
 

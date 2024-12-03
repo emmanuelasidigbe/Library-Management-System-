@@ -37,6 +37,24 @@ const LibrarianController = {
       });
     }
   },
+   async getEditBook(req:Request, res:Response)  {
+    try {
+        const bookId = req.body;
+        const book = await BookModel.findBookById(parseInt(bookId)); // Fetch the book by its ID from the database
+
+        if (!book) {
+          res.status(404).send("Book not found");
+            return 
+        }
+
+        // Pass the book data to the EJS view
+        res.render('edit', { book });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+},
+
 
   async editBook(req: Request, res: Response): Promise<void> {
     const { id } = req.params;

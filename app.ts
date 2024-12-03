@@ -34,17 +34,20 @@ app.set("view engine", "ejs");
 
 const PORT = 3000;
 
+
 app.use('/',homeRoute)
 app.use('/user',userRoute)
-app.use("/librarian",librarianRoute);
-
-// app.use(errorHandler);
+app.use("/librarian",librarianRoute);// app.use(errorHandler);
 (async () => {
   // Run database migration
-  await migration();
+  // await migration();
 
   // Start the server after migration completes
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
-})();
+})()
+
+
+
+

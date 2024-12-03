@@ -50,3 +50,8 @@ async function migration() {
 }
 
 export { migration,sql as default};
+
+if (require.main === module) {
+  // Run the migration if the file is executed directly
+  migration();
+}
