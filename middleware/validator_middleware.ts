@@ -33,6 +33,31 @@ export const addBookValidator = [
       return true;
     }),
 ];
+export const editBookValidator = [
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage("Title is required.")
+    .isLength({ max: 255 })
+    .withMessage("Title cannot exceed 255 characters."),
+
+  body("author")
+    .trim()
+    .notEmpty()
+    .withMessage("Author is required.")
+    .isLength({ max: 255 })
+    .withMessage("Author cannot exceed 255 characters."),
+
+  body("isbn")
+    .trim()
+    .notEmpty()
+    .withMessage("ISBN is required.")
+    .isLength({ min: 13, max: 13 })
+    .withMessage("ISBN must be 13 digits.")
+    .isNumeric()
+    .withMessage("ISBN must be a numeric value.")
+
+];
 
 export const signUpValidator=[
   // Validate name: it must not be empty and should be at least 3 characters long

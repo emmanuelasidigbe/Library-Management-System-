@@ -13,7 +13,7 @@ export const ensureRole = (role: "librarian" | "user") => {
       );
       return res
         .status(403)
-        .render("403", {
+        .render("error", {
           errorMessage: "Access denied: insufficient permissions.",
         });
     }

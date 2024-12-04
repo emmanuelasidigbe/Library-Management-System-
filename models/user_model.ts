@@ -6,6 +6,9 @@ export const getUserByEmail = async (email: string) => {
   const data = await sql`SELECT * FROM users WHERE email = ${email}`;
   return data[0];
 };
+export const getAllUsers= async()=>{
+  return sql`SELECT * FROM users WHERE role = 'user'`;
+}
 
 export const createUser = async (
   name: string,

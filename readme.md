@@ -20,7 +20,7 @@ A simple library management system built using Express.js and following the MVC 
 ## Requirements
 
 - Node.js (LTS version)
-- PostgreSQL
+- PostgreSQL / docker postgres
 
 ## Setup Instructions
 
@@ -32,11 +32,12 @@ A simple library management system built using Express.js and following the MVC 
 ```
 
 2. Install dependencies:
-   ```bash
+```bash
     npm i
-   ```
+```
 3. Set up database
-   ```bash
+
+```bash
     install docker desktop
     run: docker run -d \
     --name my_book_store \
@@ -46,15 +47,26 @@ A simple library management system built using Express.js and following the MVC 
     -v my_book_data:/var/lib/postgresql/data \
     -p 5432:5432 \
     postgres
-   ```
+```
 
-````
 4. Run migration
-  ```bash
-  npm run migration
-````
+
+```bash
+   npm run migration
+
+```
 
 5. Run project
-   ```bash
+```bash
    npm run dev
-   ```
+```
+
+## Note
+
+insert data into the db to be able to login as librarian
+the password for the hashed value is 'chinhuahua'
+
+```bash
+INSERT INTO users (name, email, password, role) VALUES ('kokoro', 'kokoro@gmail.com', ' $2b$10$GUkw41RotM9TnQuYBmCB3uRYV5bz6u35N4.rECjYd0F7pk63nvINe', 'librarian');
+
+```

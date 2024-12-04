@@ -1,34 +1,13 @@
 
-    <div class="modal-content" style="width:500px;">
-  <div class="search-header text-center">
-    <h2 class="text-center"> <%= message %></h2>
+
+
+  <div
+    class="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 flex items-center justify-center flex-col h-screen w-screen"
+  >
+    <div class="text-8xl text-neutral-500 mb-8">ooPs! 😢</div>
+    <div class="text-2xl text-neutral-600"><%= errorMessage %></div>
+    <a href="/" class="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 text-neutral-600 rounded-md p-2 shadow-md">home</a>
   </div>
-  <% if(code == 500) { %>
-  <div class="modal-footer" style="text-align: center;">
-    <div class="col-12">
-       <%= message %>
-    </div>
-  </div>
-  <% } %>
-    <% if(code == 400) { %>
-  <div class="modal-footer" style="text-align: center;">
-    <div class="col-12">
-       <%= message %>
-    </div>
-  </div>
-  <% } %>
-  <% if(code == 403) { %>
-  <div class="modal-footer" style="text-align: center;">
-    <div class="col-12">
-      Session Expired! Please <a href="/user/signin">SignIn</a>.
-    </div>
-  </div>
-  <% } %>
-  <% if(code != 403) { %>
-  <div class="modal-footer m-8" style="text-align: center;">
-    <div class="col-12">
-      Please go back to <a href="/">Home</a>.
-    </div>
-  </div>
-  <% } %>
-</div>
+
+
+

@@ -15,25 +15,43 @@ const BookModel = {
   },
 
   async editBook(id: number, book: Partial<Book>): Promise<Book[]> {
-    const query = sql`
-      UPDATE books
-      SET
-        ${book.title !== undefined ? sql`title = ${book.title},` : sql``}
-        ${book.author !== undefined ? sql`author = ${book.author},` : sql``}
-        ${book.isbn !== undefined ? sql`isbn = ${book.isbn},` : sql``}
-        ${
-          book.available !== undefined
-            ? sql`available = ${book.available}`
-            : sql``
-        }
-      WHERE id = ${id}
-      RETURNING *;
-    `;
+  const fields = [];
+  const values = [];
 
-    // Ensure the query does not end with a dangling comma
-    const sanitizedQuery = query.toString().replace(/, WHERE/, " WHERE");
-    return sql.unsafe<Book[]>(sanitizedQuery);
-  },
+  if (book.title !== undefined) {
+    fields.push("title = $1");
+    values.push(book.title);
+  }
+  if (book.author !== undefined) {
+    fields.push("author = $2");
+    values.push(book.author);
+  }
+  if (book.isbn !== undefined) {
+    fields.push("isbn = $3");
+    values.push(book.isbn);
+  }
+
+  if (fields.length === 0) {
+    throw new Error("No fields to update");
+  }
+
+  const query = `
+    UPDATE books
+    SET ${fields.join(", ")}
+    WHERE id = $4
+    RETURNING *;
+  `;
+
+  try {
+    // Use type assertion to tell TypeScript that the result matches the Book type
+    const updatedBook = (await sql.unsafe(query, [...values, id])) as Book[];
+
+    return updatedBook;
+  } catch (error) {
+    console.error("Error updating book:", error);
+    throw error;
+  }
+},
 
   async removeBook(id: number): Promise<boolean> {
     // Perform the delete operation and check if any row was affected

@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { ensureRole } from "../middleware/auth_middleware";
 import BookModel from "../models/book_model";
 import LibrarianController from "../controllers/librarian_controller";
-import { addBookValidator } from "../middleware/validator_middleware";
+import { addBookValidator, editBookValidator } from "../middleware/validator_middleware";
 
 const router: Router = Router();
 
@@ -13,16 +13,20 @@ router.get("/dashboard", async (req: Request, res: Response) => {
 
   res.render("librarian/index", { data: books });
 });
-
 router.get("/add-book", (req: Request, res: Response) => {
-  res.render("librarian/add");
+  res.render("librarian/add", {
+    errorMessage: "",
+  });
 });
-router.get("/edit-bbok",LibrarianController.getEditBook)
+router.get("/report", LibrarianController.getReport);
+
+
+router.get("/edit-book/:id", LibrarianController.getEditBook);
 router.get("/transactions", LibrarianController.getAllTransactions);
-router.post("/transactions",LibrarianController.returnBook);
+router.post("/edit-book/:id", editBookValidator, LibrarianController.editBook);
+router.post("/transactions", LibrarianController.returnBook);
 
 router.post("/add-book", addBookValidator, LibrarianController.addBook);
-
 
 router.post("/delete-book", LibrarianController.deleteBook);
 

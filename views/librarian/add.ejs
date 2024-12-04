@@ -22,12 +22,15 @@
         </svg>
         </a>
         <div class="ml-10">
-          <a class="mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700" href="#">Transctions</a>
+          <a class="mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700" href="/librarian/transactions">Transctions</a>
 				<a class="mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700" href="#">Report</a> 
         </div>
 
       </div>
-      <div class="flex items-center justify-center w-screen h-full">
+      <div class="flex flex-col items-center justify-center w-screen h-full">
+              <% if (errorMessage != undefined) { %>
+      <div class="text-red-500 font-bold"><%= errorMessage %></div>
+      <% } %>
         <form class="mt-4 bg-white shadow-md rounded-lg text-left w-96" method="post" action="/librarian/add-book">
           <div class="h-2 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 rounded-t-md"></div>
           <div class="px-8 py-6">

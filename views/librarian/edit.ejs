@@ -11,8 +11,11 @@
     </div>
   </div>
 
-  <div class="flex items-center justify-center w-screen h-full">
-    <form class="mt-4 bg-white shadow-md rounded-lg text-left w-96" method="post" action="/librarian/edit-book/<%= book._id %>">
+  <div class="flex items-center flex-col justify-center w-screen h-full">
+          <% if (errorMessage) { %>
+      <div class="text-red-500 font-bold"><%= errorMessage %></div>
+      <% } %>
+    <form class="mt-4 bg-white shadow-md rounded-lg text-left w-96" method="post" action="/librarian/edit-book/<%= book.id %>">
       <div class="h-2 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 rounded-t-md"></div>
       <div class="px-8 py-6">
         <label class="block font-semibold"> Title</label>
@@ -38,6 +41,13 @@
           value="<%= book.isbn %>"
           placeholder="ISBN"
           class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+        />
+               <input
+          type="text"
+          name="available"
+          value="<%= book.available %>"
+         
+          class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md hidden"
         />
         <div class="flex justify-between items-baseline">
           <button

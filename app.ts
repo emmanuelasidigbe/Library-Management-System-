@@ -41,7 +41,10 @@ app.use("/librarian",librarianRoute);// app.use(errorHandler);
 (async () => {
   // Run database migration
   // await migration();
-
+  //insert admin to db to be able to login as librarian
+  //  INSERT INTO users (name, email, password, role)
+  // VALUES ('kokoro', 'kokoro@gmail.com', ' $2b$10$GUkw41RotM9TnQuYBmCB3uRYV5bz6u35N4.rECjYd0F7pk63nvINe', 'librarian');
+  //password 'chinhuahua'
   // Start the server after migration completes
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

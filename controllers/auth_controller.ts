@@ -43,7 +43,7 @@ export async function signup(req: Request, res: Response) {
 
   if (!errors.isEmpty()) {
     // If validation failed, send the errors back to the client
-     res.status(400).render("signup",{errorMessage:"Invalid parameters"});
+     res.status(400).render("signup",{errorMessage:"Invalid arguments,please try again"});
      return
   }
 
